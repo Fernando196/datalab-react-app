@@ -1,0 +1,11 @@
+.inputContainer{
+    width: 100%;
+}
+
+.inputContainer input{
+    accent-color: #ef5223;
+}
+
+.inputLabel{
+    margin-left: 5px;
+}

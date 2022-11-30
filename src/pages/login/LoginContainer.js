@@ -1,59 +1,108 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
+import { Navigate, useNavigate } from "react-router-dom";
+import styles  from './login.module.css';
+
 import ButtonDefault from "../../components/shared/common/buttons/button-default/ButtonDefault";
-import TextField from "../../components/shared/common/inputs/text-field/TextField";
-import styles  from './login.module.css'
+import CheckBox from "../../components/shared/common/inputs/checkbox/checkbox";
+import TextField from "../../components/shared/common/inputs/textField/textField";
+
+import loginValidator from "../../hooks/useForm/formValidators/loginValidators";
+import useForm from "../../hooks/useForm/useForm";
+
+import authService from "../../services/auth.service";
+
+const login = {
+    usuario  : authService.getLastUserName(),
+    password : ''
+}
 
 const LoginContainer = () => {
-    const [ isLoading, setIsLoading ] = useState(false);
-    const [ textBtnLogin,setTextBtnLogin ] = useState('Iniciar Sesión');
+    const { values:form, isSubmitting,setIsSubmitting, handleSubmit, errors, handleChange } = useForm(login,loginValidator,Login);
+    const [ textBtnLogin,setTextBtnLogin ]            = useState('Iniciar Sesión');
+    const [ isCheckedRecordar, setIsCheckedRecordar ] = useState(false);
+    const [ msgRequestError,setMsgRequestError ]      = useState(false);
+    const navigate                                    = useNavigate();
 
-    const request = () =>{
-        return new Promise((resolve)=>{
-            setTimeout(resolve,2000)
-        })
-    }
+    useEffect(()=>{
+        if(authService.getLastUserName()) setIsCheckedRecordar(true)
+    },[])
 
-    const Login = async () =>{
+    async function Login(){
         try{
-            setIsLoading(true);
+            setIsSubmitting(true);
             setTextBtnLogin('Espere...');
-            let login = await request();
+            let login = await authService.login(form,isCheckedRecordar);
+
+            navigate('/')
 
         }catch(err){
-            console.log(err);
+            if(err?.response && err?.response?.data){
+                setMsgRequestError(err.response.data.msg);
+                setTimeout(()=> setMsgRequestError(''), 2000);
+            }
         }finally{
             setTextBtnLogin('Iniciar Sesión');
-            setIsLoading(false);
+            setIsSubmitting(false);
         }
     }
 
+    const handleChangeRecordar = (e) =>{
+        setIsCheckedRecordar(e.target.checked);
+    }
+
     return(
+        authService.isAuthenticated() ? <Navigate to="/" /> :
         <div className={ styles.loginContainer }>
             <div className={ styles.loginFormContainer }>
                 <div className={ styles.loginImg }>
                     <span>Bienvenido</span>
                 </div>
-                <div className={ styles.loginForm }>
-                   <span>Login</span>
-                   <TextField 
-                        required={true}
-                        name='Usuario'
-                        disabled={isLoading}
-                   />
-                   <TextField 
-                        required={true}
-                        name='Contraseña'
-                        disabled={isLoading}
-                   />
-                   <span>Registrate</span>
-                   <div className={ styles.loginButton }>
+                <form noValidate autoComplete="off" onSubmit={handleSubmit} className={ styles.formContainer }>
+                    <div className={ styles.formInputsContainer }>
+                        <span className={ styles.formTitle }>Login</span>
+                        <div className={ styles.formInputs }>
+                            <TextField 
+                                required    = { true }
+                                placeholder = 'Usuario'
+                                name        = "usuario"
+                                disabled    = { isSubmitting }
+                                onChange    = { handleChange }
+                                errors      = { errors?.usuario ? errors.usuario : '' }
+                                value       = { form.usuario }
+                            />
+                            <TextField 
+                                required    = {true}
+                                type        = "password"
+                                placeholder = 'Contraseña'
+                                name        = 'password'
+                                disabled    = { isSubmitting }
+                                onChange    = { handleChange }
+                                errors      = { errors?.password ? errors.password : '' }
+                                value       = { form.password }
+                            />
+                        </div>
+                        <div className={ styles.formUtils }>
+                            <CheckBox
+                                name     = 'guardar'
+                                disabled = { isSubmitting }
+                                label    = 'Recordar'
+                                checked  = { isCheckedRecordar }
+                                onChange = { handleChangeRecordar }
+                            />
+                        </div>
                         <ButtonDefault
-                            onClick={Login}
-                            name={textBtnLogin}
-                            disabled={isLoading}
+                            type     = "submit"
+                            name     = { textBtnLogin }
+                            disabled = { isSubmitting }
                         />
-                   </div>
-                </div>
+                        {
+                            msgRequestError &&
+                            <div className={ styles.msgErrorRequestContainer }>
+                                <span>{ msgRequestError }</span>
+                            </div>
+                        }
+                    </div>
+                </form>
             </div>
         </div>
     )

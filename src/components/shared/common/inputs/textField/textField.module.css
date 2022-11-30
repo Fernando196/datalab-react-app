@@ -1,11 +1,12 @@
 
 .inputContainer{
     position: relative;
+    padding-bottom: 18px;
     width: 250px;
 }
 
 .inputContainer input{
-    width: 100%;
+    width: 90%;
     padding: 10px;
     border: 1px solid rgba(0, 0, 0, 0.25);
     background: white;
@@ -15,7 +16,7 @@
     font-size: 1em;
     transition: 0.5s;
 }
-.inputContainer span{
+.inputContainer .inputPlaceholder{
     position: absolute;
     left: 0;
     padding: 10px;
@@ -26,17 +27,31 @@
     transition: 0.5s;
 }
 
-.inputContainer input:valid ~ span,
-.inputContainer input:focus ~ span{
+.inputContainer input:valid ~ .inputPlaceholder,
+.inputContainer input:focus ~ .inputPlaceholder{
     color: #ef5223;
     transform: translateX(10px) translateY(-7px);
     font-size: 0.70em;
     padding: 0 8px;
     background: white;
-    letter-spacing: 0.1em;
+    border-left: 1px solid #ef5223;
+    border-right: 1px solid #ef5223;
+    letter-spacing: 0.15em;
 }
 
 .inputContainer input:valid,
 .inputContainer input:focus{
     border: 1px solid #ef5223;
+}
+
+.inputError{
+    position: absolute;
+    color: #f44336;
+    left: 0;
+    bottom: 0;
+    font-size: 0.85em;
+}
+
+.inputError::before{
+    content: '* ';
 }

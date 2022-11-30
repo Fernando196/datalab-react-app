@@ -1,7 +1,7 @@
 import React from "react";
 import AppRoutes from "../../routes/AppRoutes";
 
-const Home = () => {
+const Main = () => {
     return(
         <div>
             <div>Component Menu</div>
@@ -12,4 +12,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default Main;
