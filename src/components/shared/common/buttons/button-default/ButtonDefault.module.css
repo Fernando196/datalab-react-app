@@ -1,0 +1,20 @@
+.buttonDefault{
+    width: 100%;
+    font-size: 1em;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background-color: #222222;
+    color: #f5f5f5;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+.buttonDefault:hover{
+    color: #ef5223;
+}
+
+.buttonDefault:active{
+    color: #222222;
+    background-color: #ef5223;
+}
