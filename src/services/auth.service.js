@@ -44,17 +44,30 @@ class AuthService{
                 let { refresh,token, ...userData } = data?.data;
 
                 localStorage.setItem('tokens',JSON.stringify({ refresh, token }));
-                localStorage.setItem('userData',JSON.stringify(userData));
+                localStorage.setItem('userData',JSON.stringify({
+                    ...userData,
+                    usuario: userData?.usuario || userData?.email
+                }));
                 if(recordar) localStorage.setItem('lastUserName',userData?.usuario || userData?.email);
                 this.authenticated = true;
-                this.userData      = userData;
+                this.userData      = {
+                    ...userData,
+                    usuario: userData?.usuario || userData?.email
+                };
             }
 
         }catch(err){
             throw err;
         }
     }
-    
+
+    logout(callback){
+        localStorage.removeItem('tokens');
+        localStorage.removeItem('userData');
+        this.authenticated = false;
+        this.userData      = null;
+        callback();
+    }
 }
 
 export default new AuthService();

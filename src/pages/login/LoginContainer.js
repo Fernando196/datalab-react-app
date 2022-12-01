@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react"
 import { Navigate, useNavigate } from "react-router-dom";
 import styles  from './login.module.css';
 
-import ButtonDefault from "../../components/shared/common/buttons/button-default/ButtonDefault";
-import CheckBox from "../../components/shared/common/inputs/checkbox/checkbox";
-import TextField from "../../components/shared/common/inputs/textField/textField";
+import ButtonDefault from "../../components/shared/buttons/button-default/ButtonDefault";
+import CheckBox from "../../components/shared/inputs/checkbox/checkbox";
+import TextField from "../../components/shared/inputs/textField/textField";
 
 import loginValidator from "../../hooks/useForm/formValidators/loginValidators";
 import useForm from "../../hooks/useForm/useForm";
