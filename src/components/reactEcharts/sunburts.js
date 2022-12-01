@@ -1,22 +1,21 @@
 import React from "react";
 import ReactECharts from "echarts-for-react";
-import data from "../../pages/dashboard/data";
+import { useDispatch } from "react-redux";
+import { onClickValue } from '../../redux/slice/graphSlice'
 
-const options = {
-    series: {
-        type: 'sunburst',
-        // emphasis: {
-        //     focus: 'ancestor'
-        // },
-        data: data,
-        radius: [0, '90%'],
-        label: {
-          rotate: 'radial'
-        }
-      }
-  }
+const Sunburst = ({ width, height,data }) =>{
+    const dispatch = useDispatch();
 
-const Sunburst = ({ width, height }) =>{
+    const options = {
+        series: {
+            type: 'sunburst',
+            data: data,
+            radius: [0, '90%'],
+            label: {
+              rotate: 'radial'
+            }
+          }
+    }
 
     return(
         <ReactECharts
@@ -25,7 +24,9 @@ const Sunburst = ({ width, height }) =>{
             lazyUpdate={true}
             theme={"theme_name"}
             // onChartReady={onChartReadyCallback}
-            // onEvent={EventsDict}
+            onEvents={{
+                'click': (e) => dispatch(onClickValue(e.data))
+            }}
             opts={{ renderer: 'svg' }}
             style={{ 
                 width: '100%',

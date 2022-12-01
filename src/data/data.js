@@ -1,4 +1,4 @@
-export default [
+const data = [
   {
     name: 'Grandpa',
     children: [
@@ -61,3 +61,5 @@ export default [
     ]
   }
 ]
+
+export default data;

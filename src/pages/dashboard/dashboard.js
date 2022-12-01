@@ -1,17 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Sunburst from "../../components/reactEcharts/sunburts";
 import styles from './dashboard.module.css'
-import json from './data';
+import { useDispatch, useSelector } from "react-redux";
 
 const Dashboard = () =>{
-    const [ data, setData ] = useState({
-        data:{},
-        criteria: 'minSize',
-    });
-
-    useEffect(()=>{
-        setData({...data, data: json});
-    },[])
+    const { data,selectedValue } = useSelector(state =>  state.graphic);
 
     return(
         <div className="app-container">
@@ -20,11 +13,12 @@ const Dashboard = () =>{
                     <div className={ styles.graphicsContainer }>
                         <Sunburst
                             height = {650}
+                            data   = {data}
                         />
                     </div>
                 </div>
                 <div className={ 'paper' }>
-                    <span>Informacion Grafica</span>
+                    <span>{ `${selectedValue}` }</span>
                 </div>
             </div>
         </div>

@@ -31,8 +31,7 @@ const LoginContainer = () => {
         try{
             setIsSubmitting(true);
             setTextBtnLogin('Espere...');
-            let login = await authService.login(form,isCheckedRecordar);
-
+            await authService.login(form,isCheckedRecordar);
             navigate('/')
 
         }catch(err){
