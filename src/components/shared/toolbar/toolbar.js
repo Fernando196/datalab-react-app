@@ -33,7 +33,7 @@ const ToolBar = () =>{
                 <span>{nameRoute}</span>
             </div>
             <div className={ styles.toolbarUserInfo }>
-                <div>{ `${userData.nombre} ${userData.apellidoPaterno} ${userData.apellidoMaterno}` || userData?.usuario }</div>
+                <div>{ userData?.nombre ? `${userData.nombre} ${userData.apellidoPaterno} ${userData.apellidoMaterno}` : userData?.usuario }</div>
                 <div>
                     <button onClick={handleLogout} className={ styles.toolbarBtnMenu +' '+styles.btnPadding }>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="26" fill="currentColor" viewBox="0 0 16 16"> 
