@@ -1,15 +1,16 @@
 import React from "react";
 import Sunburst from "../../components/reactEcharts/sunburts";
 import styles from './dashboard.module.css'
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import InfoGraphic from "./infoGraphic";
 
 const Dashboard = () =>{
-    const { data,selectedValue } = useSelector(state =>  state.graphic);
+    const data = useSelector(state =>  state.dataGraphic);
 
     return(
         <div className="app-container">
             <div className={ styles.dashboardContainer }>
-                <div className={ 'paper ' + styles.dashboardGraphics }>
+                <div className={ styles.dashboardGraphics }>
                     <div className={ styles.graphicsContainer }>
                         <Sunburst
                             height = {650}
@@ -17,9 +18,7 @@ const Dashboard = () =>{
                         />
                     </div>
                 </div>
-                <div className={ 'paper' }>
-                    <span>{ `${selectedValue}` }</span>
-                </div>
+                <InfoGraphic />
             </div>
         </div>
     )

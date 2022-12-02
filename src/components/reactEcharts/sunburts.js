@@ -1,9 +1,9 @@
 import React from "react";
 import ReactECharts from "echarts-for-react";
 import { useDispatch } from "react-redux";
-import { onClickValue } from '../../redux/slice/graphSlice'
+import { onClickValue } from '../../redux/slice/graphicSlice'
 
-const Sunburst = ({ width, height,data }) =>{
+const Sunburst = ({ width, height, data }) =>{
     const dispatch = useDispatch();
 
     const options = {
