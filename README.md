@@ -20,13 +20,14 @@ data : {
 }
 
 Datos de usuarios ya creados:
+
 user: user3
 password: 12345678
 
 user: user4
 password: 12345678
 
-**Note: Para ver mas rutas o utilizar la api revisars siguiente link: https://github.com/Fernando196/blog-api**
+**Note: Para ver mas rutas o utilizar la api revisar siguiente link: https://github.com/Fernando196/blog-api**
 
 ## Available Scripts
 
