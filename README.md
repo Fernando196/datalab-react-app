@@ -6,7 +6,8 @@ Proyecto realizado en react utilizando apache echarts para graficar.
 
 En caso de querer logear con otro usuario se deben registrar para ellos utilizar cualquier rest client.
 
-**Configuracion rest client
+**Note: Configuracion rest client**
+
 url : https://ec2-18-225-33-135.us-east-2.compute.amazonaws.com:51000/api/usuario/registro
 Content-Type: application/json
 type : POST
@@ -25,7 +26,7 @@ password: 12345678
 user: user4
 password: 12345678
 
-**Para ver mas rutas o utilizar la api revisars siguiente link: https://github.com/Fernando196/blog-api
+**Note: Para ver mas rutas o utilizar la api revisars siguiente link: https://github.com/Fernando196/blog-api**
 
 ## Available Scripts
 
