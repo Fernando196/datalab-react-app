@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { logout } from '../../../redux/slice/authSlice';
+
 import styles from './toolbar.module.css'
 import authService from '../../../services/auth.service';
 import { useNavigate,useLocation } from "react-router-dom";
 
 const ToolBar = () =>{
+    const dispatch = useDispatch();
     const userData = authService.getUserData();
     const navigate = useNavigate();
     const location = useLocation();
@@ -11,6 +15,7 @@ const ToolBar = () =>{
 
     const handleLogout = () =>{
         authService.logout(()=>{
+            dispatch(logout())
             navigate('/login');
         });
     }

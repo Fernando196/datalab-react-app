@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import AuthService from "../services/auth.service";
 
 const ProtectedRoute = () =>{
-    return AuthService.isAuthenticated() 
+    const isAuthenticated = useSelector(state => state.auth.authenticate);
+    
+    return isAuthenticated
     ? <Outlet /> 
-    : <Navigate to='/login' replace />
+    : <Navigate to='/login' />
 }
 
 export default ProtectedRoute;

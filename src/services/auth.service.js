@@ -54,6 +54,7 @@ class AuthService{
                     ...userData,
                     usuario: userData?.usuario || userData?.email
                 };
+                return userData;
             }
 
         }catch(err){

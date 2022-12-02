@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { Navigate, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authenticate } from '../../redux/slice/authSlice';
+
 import styles  from './login.module.css';
 
 import ButtonDefault from "../../components/shared/buttons/button-default/ButtonDefault";
@@ -17,6 +20,7 @@ const login = {
 }
 
 const LoginContainer = () => {
+    const dispatch     = useDispatch();
     const { values:form, isSubmitting,setIsSubmitting, handleSubmit, errors, handleChange } = useForm(login,loginValidator,Login);
     const [ textBtnLogin,setTextBtnLogin ]            = useState('Iniciar Sesión');
     const [ isCheckedRecordar, setIsCheckedRecordar ] = useState(false);
@@ -31,9 +35,9 @@ const LoginContainer = () => {
         try{
             setIsSubmitting(true);
             setTextBtnLogin('Espere...');
-            await authService.login(form,isCheckedRecordar);
+            let data = await authService.login(form,isCheckedRecordar);
+            dispatch(authenticate(data));
             navigate('/')
-
         }catch(err){
             if(err?.response && err?.response?.data){
                 setMsgRequestError(err.response.data.msg);
