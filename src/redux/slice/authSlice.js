@@ -14,7 +14,6 @@ export const authSlice = createSlice({
             state.authenticate = true
         },
         logout: (state,action) =>{
-            console.log('Entro aqui')
             state.user = null;
             state.authenticate = false;
         },
