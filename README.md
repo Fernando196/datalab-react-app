@@ -9,8 +9,9 @@ En caso de querer logear con otro usuario se deben registrar para ellos utilizar
 **Note: Configuracion rest client**
 
 url : https://ec2-18-225-33-135.us-east-2.compute.amazonaws.com:51000/api/usuario/registro
-Content-Type: application/json
-type : POST
+
+Content-Type: application/json\
+type : POST\
 data : {
     "nombre":"",    // Requerido
     "password":"",  // Requerido
@@ -21,10 +22,10 @@ data : {
 
 Datos de usuarios ya creados:
 
-user: user3
+user: user3\
 password: 12345678
 
-user: user4
+user: user4\
 password: 12345678
 
 **Note: Para ver mas rutas o utilizar la api revisar siguiente link: https://github.com/Fernando196/blog-api**
