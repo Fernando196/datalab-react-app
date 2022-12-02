@@ -11,10 +11,17 @@ const Sunburst = ({ width, height, data }) =>{
             type: 'sunburst',
             data: data,
             radius: [0, '90%'],
+            color: '#2B2B2B',
             label: {
-              rotate: 'radial'
+              rotate: 'radial',
+              color: '#ffffff'
+            },
+            emphasis:{
+                label:{
+                    color: '#ef5223'
+                }
             }
-          }
+        },
     }
 
     return(
@@ -23,7 +30,6 @@ const Sunburst = ({ width, height, data }) =>{
             notMerge={true}
             lazyUpdate={true}
             theme={"theme_name"}
-            // onChartReady={onChartReadyCallback}
             onEvents={{
                 'click': (e) => dispatch(onClickValue(e.data))
             }}

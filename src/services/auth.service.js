@@ -35,7 +35,7 @@ class AuthService{
     async login(user,recordar){
         try{
 
-            let { data } = await axios.post(`${blogApiUrl}/auth`,{
+            let { data } = await axios.post(`${blogApiUrl}/auth/`,{
                 email: user.usuario,
                 password: user.password
             });

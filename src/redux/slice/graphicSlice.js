@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import data from '../../data/data';
 
 export const graphicSlice = createSlice({
     name: 'graphic',
     initialState: {
         selected: {
             name     : '',
-            children : []
+            children : data
         }
     },
     reducers:{
